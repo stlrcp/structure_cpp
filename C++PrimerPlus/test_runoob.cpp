@@ -315,7 +315,7 @@ int main()
                 display(line);
                 return 0;
 }    // 在这里，obj 是一个对象引用，该对象是用于初始化另一个对象的
-*/
+
 
 
 #include <iostream>
@@ -366,3 +366,6 @@ int main()
                 display(line2);
                 return 0;
 }
+*/
+
+
