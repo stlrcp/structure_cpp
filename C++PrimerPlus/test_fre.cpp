@@ -55,7 +55,6 @@ int main() {
     INTEGER obj;
     Print(obj);   // 直接调用
 }
-*/
 
 
 #include <iostream>
@@ -102,3 +101,6 @@ int main()
         big.Print(20, box);
         return 0;
 }
+*/
+
+
