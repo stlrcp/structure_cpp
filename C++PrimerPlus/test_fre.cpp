@@ -125,6 +125,28 @@ int main()
 // 1. 在内联函数内不允许使用循环语句和开关语句；
 // 2. 内联函数的定义必须出现在内联函数第一次调用之前；
 // 3. 类结构中所在的类说明内部定义的函数是内联函数。
-*/
 
+
+// 在C++中，this指针是一个特殊的指针，它指向当前对象的实例。
+// 在C++中，每一个对象都能通过 this 指针来访问自己的地址。
+// 友元函数没有 this 指针，因为友元不是类的成员，只有成员函数才有 this 指针
+#include <iostream>
+class MyClass{
+    private:
+        int value;
+    public:
+        void setValue(int value) {
+            this->value = value;
+        }
+        void printValue() {
+            std::cout << "Value: " << this->value << std::endl;
+        }
+};
+int main() {
+    MyClass obj;
+    obj.setValue(42);
+    obj.printValue();
+    return 0;
+}
+*/
 
