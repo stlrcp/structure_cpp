@@ -300,5 +300,31 @@ int main()
     }
     return 0;
 }
+
+
+#include <iostream>
+using namespace std;
+class Box{
+    public:
+        Box(){;}
+        ~Box(){;}
+        Box* get_address()  // 得到this的地址
+        {
+            return this;
+        }
+};
+int main(){
+    Box box1;
+    Box box2;
+    // Box* 定义指针 p 接受对象 box 的get_address() 成员函数的返回值，并打印
+    Box* p = box1.get_address();
+    cout << p << endl;
+
+    p = box2.get_address();
+    cout << p << endl;
+    return 0;
+}
+// this 指针的类型可理解为 Box*
+// 此时得到两个地址分别为 box1 和 box2 对象的地址
 */
 
