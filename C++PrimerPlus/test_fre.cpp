@@ -863,6 +863,32 @@ int main()
         cout << sizeof(rec) << endl;
         return 0;
 }
+
+
+//  关于构造函数初始化列表的执行顺序进行补充
+#include <iostream>
+using namespace std;
+class A{
+    public:
+        A(){
+            cout << "call A()" << endl;
+        }
+};
+class B:A{
+    public:
+        B(int val) : A(), value(val)
+        {
+            val = 10;   // 重新赋值
+            cout << "call B()" << endl;
+            cout << val << endl;
+        }
+    private:
+        int value;
+};
+int main(){
+        B b(10);
+        return 0;
+}    // 说明放在初始化列表的部分在构造函数之前执行
 */
 
 
