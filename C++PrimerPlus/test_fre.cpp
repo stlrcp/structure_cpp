@@ -889,6 +889,45 @@ int main(){
         B b(10);
         return 0;
 }    // 说明放在初始化列表的部分在构造函数之前执行
+
+
+// 派生类在继承基类的成员变量时，会单独开辟一块内存保存基类的成员变量，因此派生类自己的成员变量即使和基类的成员变量重名，但是也不会引起冲突。
+#include <iostream>
+using namespace std;
+// 基类
+class A{
+    public:
+        A() { n = 0; }
+        ~A() { cout << "析构函数" << endl; }
+        int getA() { return n; }
+        void setA(int t) { n = t; }
+    private:
+        int n;
+};
+// 派生类
+class B : public A {
+    public:
+        B() { n = 0; }
+        ~B() { cout << "~B()" << endl; }
+        int getB() { return n; }
+        void setB(int t) { n = t; }
+    private:
+        int n;
+};
+int main(int argc, char* argv[])
+{
+        B b;
+        b.setA(10); // 设置基类的成员变量n
+
+        cout << "A::n = " << b.getA() << endl;
+        cout << "B::n = " << b.getB() << endl;
+
+        b.setB(9);   // 设置派生类的成员变量n
+        cout << "A::n = " << b.getA() << endl;
+        cout << "B::n = " << b.getB() << endl;
+        return 0;
+}
 */
+
 
 
