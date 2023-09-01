@@ -797,5 +797,72 @@ int main()
         cout << sizeof(c) << endl;
         return 0;
 }
+
+
+// 一个派生类继承了所有的基类方法，但下列情况除外
+// - 基类的构造函数、析构函数和拷贝构造函数
+// - 基类的重载运算符
+// - 基类的友元函数
+// 因此，我们不能够再子类的成员函数体中调用基类的构造函数来为成员变量进行初始化。例如下面这样是不可以的
+#include <iostream>
+using namespace std;
+// 基类
+class Shape
+{
+    public:
+        Shape(int w, int h)
+        {
+            width = w;
+            height = h;
+        }
+    protected:
+        int width;
+        int height;
+};
+// 派生类
+class Rectangle: public Shape{
+    public:
+        Rectangle(int a, int b)
+        {
+            Shape(a, b);
+        }
+};
+
+// 但是我们可以把基类的构造函数放在子类构造函数的初始化列表上，以此实现调用基类的构造函数来为子类从基类继承的成员变量初始化
+#include <iostream>
+using namespace std;
+// 基类
+class Shape
+{
+    public:
+        Shape(int w, int h)
+        {
+            width = w;
+            height = h;
+
+            cout << "width = " << w << endl;
+            cout << "height = " << h << endl;
+        }
+
+    protected:
+        int width;
+        int height;
+};
+// 派生类
+class Rectangle : public Shape{
+    public:
+        Rectangle(int a, int b):Shape(a, b)
+        {
+            cout << " shape = " << a * b << endl;
+        }
+};
+int main()
+{
+        cout << "Hello, world!" << endl;
+        Rectangle rec(2,3);
+        cout << sizeof(rec) << endl;
+        return 0;
+}
 */
+
 
