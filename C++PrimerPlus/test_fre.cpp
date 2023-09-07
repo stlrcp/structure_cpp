@@ -1071,7 +1071,80 @@ int main(){
         cout << "Volume of Box3 : " << volume << endl;
         return 0;
 }
+
+
+// 注意：
+// 1. 运算符重载不可以改变语法结构与。
+// 2. 运算符重载不可以改变操作数的个数。
+// 3. 运算符重载不可以改变优先级。
+// 4. 运算符重载不可以改变结合性。
+
+// 类重载、覆盖、重定义之间的区别：
+// 重载指的是函数具有不同的参数列表，而函数名相同的函数。重载要求参数列表必须不同，比如参数的类型不同、参数的个数不同、参数的顺序不同。
+// 如果仅仅是函数的返回值不同是没办法重载的，因为重载要求参数列表必须不同。（发生在同一个类里）
+// 覆盖是存在类中，子类重写从基类继承过来的函数。被重写的寒素不能是 static 的。必须是 virtual 的。但是函数名、返回值、参数列表都必须和基类相同（发生在基类和子类）
+// 重定义也叫做隐藏，子类重新定义父类中有相同名称的非虚函数（参数列表可以不同）。（发生在基类和子类）
+
+// this 指针的作用
+// this 指针是一个隐含于每一个非静态成员函数中的特殊指针。它指向正在被该成员函数操作的那个对象。
+// 当对一个对象调用成员函数时，编译器先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时由隐含使用 this 指针
+// 运算符重载的同时也可以发生函数重载
+#include <iostream>
+using namespace std;
+// 加号运算符重载
+class xiMeng{
+    public:
+        int M_A;
+        int M_B;
+        // 通过成员函数运算符重载
+        // xiMeng operator+(xiMeng & p)
+        // {
+        //     xiMeng temp;
+        //     temp.M_A = this->M_A + p.M_A;
+        //     temp.M_B = this->M_B + p.M_B;
+        //     return temp;
+        // }
+};
+// 通过全局函数运算符重载
+xiMeng operator+ (xiMeng & p1, xiMeng & p2)
+{
+        xiMeng temp;
+        temp.M_A = p1.M_A + p2.M_A;
+        temp.M_B = p1.M_B + p2.M_B;
+        return temp;
+}
+// 运算符重载也可以发生函数重载
+xiMeng operator+(xiMeng& p, int num)
+{
+        xiMeng temp;
+        temp.M_A = p.M_A + num;
+        temp.M_B = p.M_B + num;
+        return temp;
+}
+void xiMengTest(){
+        xiMeng p1;
+        p1.M_A = 15;
+        p1.M_B = 25;
+
+        xiMeng p2;
+        p2.M_A = 10;
+        p2.M_B = 30;
+        // 通过全局函数运算符重载
+        xiMeng p3 = p1 + p2;
+        cout << "p3.M_A = " << p3.M_A << endl;
+        cout << "p3.M_B = " << p3.M_B << endl;
+
+        // 运算符重载也可以发生函数重载
+        xiMeng p4 = p1 + 100;
+        cout << "p4.M_A = " << p4.M_A << endl;
+        cout << "p4.M_B = " << p4.M_B << endl;
+}
+int main(){
+        xiMengTest();
+        return 0;
+}
 */
+
 
 
 
