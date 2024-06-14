@@ -1,4 +1,6 @@
 /*
+//   https://blog.csdn.net/qq_41854911/article/details/121196531   
+
 // 1. 宏的定义与撤销
 // 普通宏定义
 #define PI 3.14    // 编译阶段替换掉宏
