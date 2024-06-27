@@ -1,0 +1,1 @@
+void dependent_function(){}
