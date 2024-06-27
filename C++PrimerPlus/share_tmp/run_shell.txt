@@ -19,3 +19,7 @@ g++ main.cpp -L. -lmylibrary
 g++ -fPIC -shared -o libmylibrary.so my_library.cpp  -L/home/corex/tmp_test/tmp_test/share_tmp -Wl,-rpath,/home/corex/tmp_test/tmp_test/share_tmp: ./libdependency.so -ldependency
 g++ -fPIC -shared -o libmylibrary.so my_library.cpp  -L/home/corex/tmp_test/tmp_test/share_tmp -ldependency -Wl,-rpath,/home/corex/tmp_test/tmp_test/share_tmp: ./libdependency.so
 
+g++ -fPIC -shared -o libtwicedy.so twicedy.cpp -L/home/corex/tmp_test/tmp_test/share_tmp -Wl,-rpath,/home/corex/tmp_test/tmp_test/share_tmp: ./libmylibrary.so ./libdependency.so
+readelf -d libtwicedy.so
+ldd libtwicedy.so
+g++ -fPIC -shared -o libtwicedy.so twicedy.cpp -L/home/corex/tmp_test/tmp_test/share_tmp -ldependency -lmylibrary
