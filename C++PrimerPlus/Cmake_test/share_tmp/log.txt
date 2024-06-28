@@ -1,0 +1,2 @@
+/opt/rh/devtoolset-9/root/usr/bin/c++ -rdynamic CMakeFiles/test_share.dir/src/libexample.cpp.o CMakeFiles/test_share.dir/src/main.cpp.o -o test_share
+/opt/rh/devtoolset-9/root/usr/bin/c++ -rdynamic CMakeFiles/test_share.dir/src/libexample.cpp.o CMakeFiles/test_share.dir/src/main.cpp.o -o test_share
