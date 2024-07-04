@@ -64,3 +64,79 @@ int main(){
     return 0;
 }
 */
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+void sub_str(char* source, int begin, int length, char* target){
+    // cout << source << endl;
+    // cout << target << endl;
+    // cout << begin << endl;
+    // cout << length << endl;
+    int i;
+    for (i=0; i<length; i++){
+        target[i] = source[begin+i];
+        // cout << target << endl;
+    }
+    target[i] = '\0';      //  必须加，不然会出现内存被占用，得到的 target 长度异常
+}
+
+bool check_sub(char* l_str, char* s_str){
+    char l_s_str[100] = "";
+    bool equal;
+    for (int i=0; i<(strlen(l_str)-strlen(s_str)+1); i++){
+        for(int j=0; j<strlen(s_str); j++){
+            l_s_str[j] = l_str[i+j];
+        }
+        // cout << l_s_str << endl;
+        // if (l_s_str == s_str)
+        //     return true;
+        
+        for (int n=0; n<strlen(s_str); n++){
+            if(s_str[n] != l_s_str[n]){
+                break;
+            }
+            if (n == (strlen(s_str)-1))  
+                return true; 
+        }
+    }
+    return false;
+
+}
+
+int main(){
+    char* A ="abczhdshoozjpzjoppzhiahsopppp";
+    char* B ="shsojosmxhposhoozjapsjnxjhp";
+    cout << "A len = " << strlen(A) << endl;
+    cout << "B len = " << strlen(B) << endl;
+    if (strlen(A) > strlen(B)){
+        char* tmp = A;
+        A = B;
+        B = tmp;
+    }
+    char tmp_con[100] = "";
+    char tmp_str[100] = "";    // 必须初始化，不然内存污染，打印出的tmp_str异常
+    for (int i=0; i<strlen(A); i++){
+        for (int j=0; j<(strlen(A)-i); j++){
+            sub_str(A, i, j+1, tmp_str);
+            // cout << "i = " << i << "  " << tmp_str << endl;
+            if(check_sub(B, tmp_str) && strlen(tmp_str) > strlen(tmp_con)){
+                cout << strlen(tmp_str) << endl;
+                sub_str(tmp_str, 0, strlen(tmp_str), tmp_con);
+            }
+                
+
+            // tmp_str = tmp_con;
+        }
+        for (int n=0; n<strlen(tmp_str); n++){
+               tmp_str[n] = '\0';
+        }
+        // break;
+        // cout << strlen(tmp_str) << endl;
+        // cout << tmp_str << endl;
+    }
+    cout << tmp_con << endl;
+    // cout << strlen(tmp_str) << endl;
+    return 0;
+}
