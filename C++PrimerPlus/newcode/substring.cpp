@@ -143,7 +143,7 @@ int main(){
     // cout << strlen(tmp_str) << endl;
     return 0;
 }
-*/
+
 
 // 简化代码如下
 #include <iostream>
@@ -198,5 +198,161 @@ int main(){
         }
     }
     cout << tmp_con << endl;
+    return 0;
+}
+
+
+// 动态规划？
+#include <bits/stdc++.h>
+using namespace std;
+string LCS(string str1, string str2){
+    if(str1.size() > str2.size())
+        swap(str1, str2);
+    int m = str1.size();
+    int n = str2.size();
+    // dp[i][j] str1前i个字符和str2前j个字符(以其为尾字符)的最长公共子串长度
+    int dp[m+1][n+1];
+    int maxlen=0, end=0;
+    // base case
+    for(int i=0; i<=m; ++i) dp[i][0] =0;
+    for(int j=0; j<=n; ++j) dp[0][j] = 0;
+    for(int i=1; i<=m; ++i){
+        for(int j=1; j<=n; ++j){
+            if(str1[i-1] == str2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else
+                dp[i][j] = 0;
+            if(dp[i][j] > maxlen){
+                maxlen=dp[i][j];
+                end = i-1;
+            }
+        }
+    }
+    if(maxlen == 0) return "-1";
+    else
+        return str1.substr(end-maxlen+1, maxlen);
+}
+int main(){
+    string s1, s2;
+    while(cin>>s1>>s2)
+        cout << LCS(s1, s2) << endl;
+}
+
+
+// 暴力寻找
+#include <iostream>
+#include <vector>
+#include <cstring>
+using namespace std;
+string a, b, minn = "";
+string cut(int l, int r){
+    string tmp="";
+    for(int i=l; i<=r; i++)
+        tmp += a[i];
+    return tmp;  // l 代表左端点，r代表右端点
+}
+void solve(){
+    if (a.size() > b.size())
+        swap(a, b);
+    for(int i=0; i<a.size(); i++){
+        for(int j=i; j<a.size(); j++){
+            string tmp = cut(i, j);
+            if(b.find(tmp) != string::npos)
+                if(tmp.size() > minn.size())
+                    minn =tmp;
+        }
+    }
+    cout << minn << "\n";
+}
+signed main(){
+    while(cin>>a>>b){
+        minn = ""; // 因为有多组输入，这里进行一个清空的操作
+        solve();
+    }
+    return 0;
+}
+
+
+// 主要使用了 string 库中的方法
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+int main(){
+    string s1, s2;
+    while(cin >> s1>>s2){
+        if(s1.length() > s2.length())
+            swap(s1, s2);
+        string output = "";
+        for(int i=0; i<s1.length(); i++){
+            for(int j=i; j<s1.length(); j++){
+                if(int(s2.find(s1.substr(i, j-i+1))) < 0)
+                    break;
+                else if(output.length() < j-i+1) // 更新较长的子串
+                    output = s1.substr(i, j-i+1); 
+            }
+        }
+        cout << output << endl;
+    }
+    return 0;
+}
+
+
+// 枚举改进 - 类似于动态规划
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+int main(){
+    string s1, s2;
+    while(cin>>s1>>s2){
+        if(s1.length() > s2.length())
+            swap(s1, s2);
+        string output="";
+        for(int i=0; i<s1.length(); i++){
+            for(int j=0; j<s2.length(); j++){
+                int length =0;
+                int x=i, y=j;
+                while(x<s1.length() && y<s2.length() && s1[x] == s2[y]){
+                    x++;
+                    y++;
+                    length++;
+                }
+                if(output.length() < length)
+                    output = s1.substr(i, x-i);
+            }
+        }
+        cout << output << endl;
+    }
+    return 0;
+}
+*/
+
+// 动态规划
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+int main(){
+    string s1, s2;
+    while(cin>>s1>>s2){
+        if(s1.length() > s2.length())
+            swap(s1, s2);
+        vector<vector<int>> dp(s1.length()+1, vector<int>(s2.length()+1, 0)); // dp[i][j] 表示到s1第i个个到s2第j个为止的公共子串长度
+        int max=0, end=0;
+        for(int i=1; i<s1.length(); i++){
+            for(int j=1; j<=s2.length(); j++){
+                if(s1[i-1] == s2[j-1])
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                else
+                    dp[i][j] = 0;
+                if(dp[i][j] > max){
+                    max = dp[i][j];
+                    end = i-1;
+                }
+            }
+        }
+        cout << s1.substr(end-max+1, max) << endl;
+    }
     return 0;
 }
