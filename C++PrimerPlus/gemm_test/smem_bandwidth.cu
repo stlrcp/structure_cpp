@@ -1,3 +1,6 @@
+// https://github.com/ifromeast/cuda_learning/tree/main/bandwidth
+// https://zhuanlan.zhihu.com/p/657632577
+
 #include <cstdio>
 #include <cstdint>
 
