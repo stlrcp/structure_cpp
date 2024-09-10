@@ -260,6 +260,137 @@ int main() {
 }
 */
 
+
+/*
+#include <iostream>
+#include <vector>
+using namespace std;
+void test01(){
+	vector<vector<int>> v;    // 创建一个外层容器
+	vector<int> v1(10, 1);   // 创建一些内层容器，并赋值
+	vector<int> v2(10, 2);
+	vector<int> v3(10, 3);
+	v.push_back(v1);
+	v.push_back(v2);
+	v.push_back(v3);
+	// for(int i=0; i<3; i++){
+	// 	for(int j=0; j<10; j++){
+	// 		cout << v[i][j] << " ";
+	// 	}
+	// 	cout << endl;
+	// }
+	for (vector<vector<int>>::iterator it = v.begin(); it != v.end(); it++){
+		for (vector<int>::iterator it1 = (*it).begin(); it1 != (*it).end(); it1++){
+			cout << *it1 << " ";
+		}
+		cout << endl;
+	}
+}
+int main(int argv, char** argc){
+	test01();
+	return 0;
+}
+
+
+#include <iostream>
+#include <vector>  // 如果想用 vector 必须包含对应头文件
+using namespace std;
+int main(){
+	int m = 3, n = 5;
+	vector<vector<int>> vec(m);   // 这里 m 就是相当于二维数组的行数，必须写，不然报错
+	// 这里创建一个 m*n 的二维 vector
+	for(int i=0; i<m; i++){
+		// 这里是给内层 vector 定义大小，默认是0，这里 n 是个数，不是值
+		vec[i].resize(n);   // 利用 resize 进行扩充
+	}
+	// 赋值，尝试使用了 vec[i].push_back(10) 为其赋值，失败
+	for(int i=0; i<3; i++){
+		for(int j=0; j<5; j++){
+			vec[i][j] = j + 100;
+		}
+	}
+	std::cout << vec.size() << std::endl;
+	std::cout << vec[0].size() << std::endl;
+	for (int i = 0; i < vec.size(); i++){
+		for(int j=0; j < vec[0].size(); j++){
+			cout << vec[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+int main(){
+	vector<vector<int>> matrix = {{1, 2, 3}, {4, 5, 6}};
+	for(int i=0; i<matrix.size(); i++){
+		for (int j = 0; j < matrix[i].size(); j++){
+			cout << matrix[i][j] << " ";
+		}
+		cout << endl;
+	}
+	system("pause");
+	return 0;
+}
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+int main(){
+	int r = 0, c = 0;
+	cout << "输入行数 r: ";  // 规定二维数组行数
+	cin >> r;
+	cout << "输入列数 c: ";   // 规定二维数组列数
+	cin >> c;
+	vector<vector<int>> array; // 定义二维数组
+	vector<int> v; // 定义一维数组
+	array.clear();   // 将二维数组清空，或初始化
+	int temp = 0;
+	for(int i=0; i<r; i++) {   // 输入 r*c 个二维数组
+		cout << "开始输入第 " << i + 1 << " 行 " << endl;
+		v.clear();   // 子数组返回时要清除
+		for (int j = 0; j<c; j++){
+			cout << "输入第 " << j + 1 << " 列中数字：";
+			cin >> temp;
+			v.push_back(temp);
+		}
+		array.push_back(v);
+	}
+	cout << "数组为：" << endl;
+	for (int i = 0; i < r; i++){  // 打印输入的二维数组
+		for (int j = 0; j < c; j++){
+			cout << array[i][j] << " ";
+		}
+		printf("\n");
+	}
+	// system("pause");
+	return 0;
+}
+
+
+#include <string>
+#include <iostream>
+#include <vector>
+using namespace std;
+int main(){
+	// vector<vector<int>> c(2, vector<int>(6));
+	vector<vector<int>> c(2, vector<int>(6, 2));
+	for (int i = 0; i < c.size(); i++){
+		for (int j = 0; j < c[i].size(); j++){
+			cout << c[i][j] << " ";
+		}
+		cout << "\n";
+	}
+	system("pause");
+	return 0;
+}
+*/
+
+
 // 修改器
 #include <iostream>
 using namespace std;
