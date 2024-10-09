@@ -5,7 +5,7 @@ using namespace std;
 
 vector<double> csfm(vector<double> veca){
 	vector<double> vec_res;
-	double res_all;
+	double res_all=0;
 	for(auto i : veca){
 		res_all += exp(i);
 	}
