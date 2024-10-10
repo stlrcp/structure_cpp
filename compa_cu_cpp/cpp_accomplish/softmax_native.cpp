@@ -35,4 +35,15 @@ inp = torch.Tensor([1.2, 2.3, 3.4, 4.5])
 out = nn.Softmax()
 output = out(inp)
 print(output)
+
+
+import torch.nn as nn
+x = [[1, 1, 3], [1, 2, 3]]
+inp = torch.tensor(x,dtype=torch.float32)
+# m = nn.Softmax(dim=0)
+# m = nn.Softmax(dim=1)
+m = nn.Softmax(dim=-1)
+out = m(inp)
+print(out)
+
 */
