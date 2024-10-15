@@ -87,7 +87,6 @@ int main(){
 // 2 7 1 5 3 8 6 4 9
 // 3 8 6 9 1 4 2 5 7
 // 0 4 5 2 7 6 8 3 1
-*/
 
 
 // 有效的括号
@@ -121,4 +120,38 @@ int main(){
         cout << "success" << endl;
     else
         cout << "failed" << endl;
+}
+*/
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+bool is_hw(string in_str){
+    string tmp = "";
+    for (int i = in_str.length() - 1; i >= 0; i--)
+        tmp += in_str[i];
+    if (in_str == tmp)
+        return true;
+    else
+        return false;
+}
+
+int main(){
+    string tmp = "aababjsllsssojoaql";
+    // string tmp = "aabaa";
+    vector<int> len;
+    for (int i = 0; i < tmp.length(); i++)
+    {
+        for (int j = 0; j < tmp.length() - i; j++){
+            string sub_tmp = tmp.substr(i, j+1);
+            if (is_hw(sub_tmp)){
+                len.push_back(sub_tmp.length());
+                cout << "length = " << sub_tmp.length() << " sub_tmp = " << sub_tmp << endl;
+            }
+        }
+    }
+    return 0;
 }
