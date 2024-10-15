@@ -60,8 +60,8 @@ for i in range(t_l):
         print(a[i*8:(i+1)*8] + (8-len(a[i*8:(i+1)*8]))*'0')
     else:
         print(a[i*8:(i+1)*8])
-"""
 
+# 十六进制转十进制
 print(oct(10))
 print(hex(10))
 print(bin(10))
@@ -81,3 +81,68 @@ for i in tmp_str[2:]:
     res += int(n) * 16**(tmp_len)
     tmp_len = tmp_len-1
 print(res)
+"""
+
+# 接雨水
+height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+left_index = []
+def get_sublist(par_height):
+    t_m = max(par_height)
+    if len(par_height) > 1:
+        for index,value in enumerate(par_height):
+            if value == t_m:
+                print(index)
+                left_index.append(index)
+                print(par_height[0:index+1])
+                # print(par_height[index:-1])
+                get_sublist(par_height[0:index])
+                # get_sublist(par_height[index+1:-1])
+                # break
+right_index = []
+def get_rsubh(par_height):
+    if len(par_height) > 1:
+        t_m = max(par_height)
+        for index,value in enumerate(par_height):
+            if value == t_m:
+                # print(index)
+                right_index.append(index)
+                # print(par_height[index+1:-1])
+                get_rsubh(par_height[index+1:-1])
+
+def sum_left(sub_height):
+    sum = 0
+    for i in sub_height[0:-1]:
+        if (sub_height[0] - i) > 0:
+            sum += (sub_height[0] - i)
+    print(sum)
+    return sum
+    
+    
+sum_list = []
+            
+get_sublist(height)
+# print(left_index)
+left_index.reverse()
+# print(left_index)
+# print(len(left_index))
+for ind in range(len(left_index)-1):
+    tlh = height[left_index[ind]:left_index[ind+1]+1]
+    print(tlh)
+    sum_list.append(sum_left(tlh))
+    
+    
+get_rsubh(height)
+right_height = height[right_index[0]:-1]
+# print(right_index)
+
+tmp_right = right_index[1:]
+tmp_addone = [i+1 for i in tmp_right]
+# print(tmp_addone.insert(0, 0))
+
+for ind in range(len(tmp_addone)-1):
+    trh = right_height[tmp_addone[ind]:tmp_addone[ind+1]+1]
+    # print(trh)
+    trh.reverse()
+    sum_list.append(sum_left(trh))
+
+print(sum_list)
