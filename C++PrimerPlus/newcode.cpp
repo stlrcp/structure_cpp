@@ -89,3 +89,36 @@ int main(){
 // 0 4 5 2 7 6 8 3 1
 */
 
+
+// 有效的括号
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+bool is_valid(string input){
+    vector<char> cha_vec;
+    for (auto i : input)
+    {
+        if (i == '{' || i == '(' || i == '[' )
+            cha_vec.push_back(i);
+        else if (i == '}' && cha_vec.back() == '{')
+            cha_vec.pop_back();
+        else if (i == ']' && cha_vec.back() == '[')
+            cha_vec.pop_back();
+        else if (i == ')' && cha_vec.back() == '(')
+            cha_vec.pop_back();
+        else
+            return false;
+    }
+    if (cha_vec.size() > 0){
+        return false;
+    }
+    return true;
+}
+int main(){
+    string inp = "{[({({}{{[[]]}}())})]}{{";
+    if (is_valid(inp))
+        cout << "success" << endl;
+    else
+        cout << "failed" << endl;
+}
