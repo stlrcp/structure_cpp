@@ -121,7 +121,7 @@ int main(){
     else
         cout << "failed" << endl;
 }
-*/
+
 
 
 #include <iostream>
@@ -153,5 +153,64 @@ int main(){
             }
         }
     }
+    return 0;
+}
+*/
+
+#include <iostream>
+using namespace std;
+
+struct listNode{
+    int num;
+    listNode *next;
+    listNode(int val) : num(val), next(nullptr) {}  // 必须有构造函数，方便 new 实现，不然要使用 malloc 分配内存
+};
+
+void print_list(listNode *tmp){
+    while (tmp != nullptr)
+    {
+        cout << tmp->num << endl;
+
+        tmp = tmp->next;
+    }
+}
+
+listNode* delete_ind(listNode *tmp, int value){
+    listNode *aft = new listNode(0);   // 初始化头
+    listNode *pre_aft;
+    cout << "aft = " << aft << endl;
+    pre_aft = aft;     // 重命名获取首地址
+    while (tmp->next != nullptr)    // 需要保持一致，不能越界
+    {
+        
+        aft->next = tmp;
+        if (tmp->next->num != value)   // 保证移除的是需要的
+        {
+            tmp = tmp->next;
+        }
+        else{
+            cout << "tmp.num = " << tmp->num << endl;
+            tmp = tmp->next->next;
+        }
+        aft = aft->next;
+        }
+    return pre_aft->next->next;
+}
+
+int main(){
+    listNode *pre;
+    listNode *head = new listNode(0);
+    pre = head;
+    // pre = &tmp;
+    int nums[6] = {2, 4, 6, 3, 1, 5};
+    for (auto i : nums){
+        head->next = new listNode(i);
+        // tmp.num = i;
+        head = head->next;
+    }
+    print_list(pre);
+    listNode *suff;
+    suff = delete_ind(pre, 3);
+    print_list(suff);
     return 0;
 }
