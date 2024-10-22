@@ -233,4 +233,116 @@ int main()
     std::cout << std::endl;
     return 0;
 }
+
+
+//  归并排序
+#include <iostream>
+using namespace std;
+void range(int nums[], int left, int mid, int right){
+    int num1 = mid - left+1;
+    int num2 = right - mid;
+    int tmp1[num1] = {};
+    int tmp2[num2] = {};
+    for (int i = 0; i < num1; i++){
+        tmp1[i] = nums[left+i];
+    }
+    for (int j = 0; j < num2; j++){
+        // tmp2[j] = nums[left + num1 + j];
+        tmp2[j] = nums[mid + j+1];
+    }
+    int i = 0;
+    int j = 0;
+    int k = left;
+    while(i<num1 && j <num2){
+        if(tmp1[i] <= tmp2[j]){
+            nums[k] = tmp1[i];
+            i++;
+        }else{
+            nums[k] = tmp2[j];
+            j++;
+        }
+        k++;
+    }
+    cout << "i = " << i << " j = " << j << endl;
+    // return;
+    while (i < num1)
+    {
+        nums[k] = tmp1[i];
+        i++;
+        k++;
+    }
+    while(j < num2){
+        nums[k] = tmp2[j];
+        j++;
+        k++;
+    }
+};
+
+void mergerange(int nums[], int left, int right){
+    if(left < right){     // 这里出现错误，用了个 while，导致无法跳出循环
+        int mid = left + (right - left) / 2;
+        cout << "mid = " << mid << endl;
+        mergerange(nums, left, mid);
+        mergerange(nums, mid + 1, right);
+        range(nums, left, mid, right);
+        // return;
+    }
+}
+
+int main(){
+    int num[5] = {2, 4, 5, 3, 1};
+    mergerange(num, 0, 4);
+    for(auto i: num){
+        cout << "i = " << i << endl;
+    }
+    // int nums1[3] = {};
+    // int nums2[2] = {};
+    // for (int i = 0; i < 3; i++){
+    //     nums1[i] = i;
+    // }
+    // for (int i = 0; i < 3; i++){
+    //     cout << "nums1[i] = " << nums1[i] << endl;
+    // }
+    return 0;
+}
+
 */
+
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int range(int arr[], int left, int right){
+    int i = left;
+    int j = right;
+    int key = arr[left];
+    while(i != j){
+        while(i < j && arr[j] >= key){   // 这里应该用 while ，用成了 if
+            j--;
+        }
+        while(i<j && arr[i] <= key){    // 这里应该用 while ，用成了 if
+            i++;
+        }
+        swap(arr[i], arr[j]);
+    }
+    swap(arr[left], arr[i]);
+    return i;
+}
+
+void quicksort(int arr[], int left, int right){
+    if (left >= right)
+        return;
+    int i = range(arr, left, right);
+    quicksort(arr, left, i - 1);
+    quicksort(arr, i + 1, right);
+}
+
+int main(){
+    int nums[5] = {2, 4, 5, 3, 1};
+    quicksort(nums, 0, 4);
+    for(auto i: nums){
+        cout << "i = " << i << endl;
+    }
+    return 0;
+}
