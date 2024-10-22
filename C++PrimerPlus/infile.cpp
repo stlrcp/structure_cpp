@@ -1,3 +1,53 @@
+/*
+//  reverselist 
+#include <iostream>
+using namespace std;
+
+struct listNode{
+    int num;
+    listNode *next;
+    listNode(int val) : num(val), next(nullptr){}
+};
+
+void print_list(listNode* input){
+    while(input != nullptr){
+        cout << input->num << endl;
+        input = input->next;
+    }
+}
+
+void turn_list(listNode* input){
+    // listNode *head = new listNode(0);
+    listNode *head = nullptr;
+    listNode *src;
+    while(input != nullptr){
+        // head = input;
+        listNode *tmp = new listNode(input->num);
+        src = tmp;
+        tmp->next = head;
+        head = tmp;
+        input = input->next;
+    }
+    print_list(src);
+}
+
+int main(){
+    int num[5] = {2, 4, 5, 3, 1};
+    listNode *head = new listNode(0);
+    listNode *pre;
+    pre = head;
+    for (auto i : num)
+    {
+        // cout << "i = " << i << endl;
+        head->next = new listNode(i);
+        head = head->next;
+    }
+    // print_list(pre);
+    turn_list(pre->next);
+    return 0;
+}
+*/
+
 #include <iostream>
 #include <vector>
 #include <sstream>
